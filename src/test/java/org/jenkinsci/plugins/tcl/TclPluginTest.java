@@ -21,29 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.jenkinsci.plugins.tcl.interpreter;
+package org.jenkinsci.plugins.tcl;
 
-import tcl.lang.channel.StdChannel;
+import hudson.model.FreeStyleProject;
+import java.io.IOException;
+import org.jvnet.hudson.test.HudsonTestCase;
+import org.junit.*;
 
-/**
- * @author Oleg Nenashev <o.v.nenashev@gmail.com>
- */
-public enum jTclChannelType {
-    STDERR(StdChannel.STDERR),
-    STDOUT(StdChannel.STDOUT),
-    STDIN(StdChannel.STDIN);
+public class TclPluginTest extends HudsonTestCase {
 
-    int value;
-
-    private jTclChannelType(int value) {
-        this.value = value;
+    private FreeStyleProject CreateProject(String script)
+            throws IOException {
+        FreeStyleProject p = createFreeStyleProject();
+        p.getBuildersList().add(new TclScriptBuilder(script));
+        return p;
     }
 
-    public int getValue() {
-        return value;
-    }
-
-    public String getChannelName() {
-        return toString().toLowerCase();
+    @Test
+    public void testSuccess()
+    {
+        return;
     }
 }
